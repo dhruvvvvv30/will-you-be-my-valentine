@@ -126,25 +126,26 @@
         noBtn.style.top = Math.random() * maxY + "px";
     }
 
-    function showYesPage() {
-        const yesBtn = document.getElementById("yesButton");
-        yesBtn.classList.add("clicked");
+<script>
+function showYesPage() {
+    const song = document.getElementById("loveSong");
 
-        confetti({
-            particleCount: 180,
-            spread: 80,
-            origin: { y: 0.6 }
-        });
+    // 🔑 Start music immediately on user click (THIS is the key)
+    song.play().catch(() => {
+        console.log("Autoplay blocked until user interaction");
+    });
 
-        setTimeout(() => {
-            document.getElementById("questionPage").style.display = "none";
-            document.getElementById("yesPage").style.display = "block";
+    confetti({
+        particleCount: 180,
+        spread: 80,
+        origin: { y: 0.6 }
+    });
 
-            const song = document.getElementById("loveSong");
-            song.play();
-        }, 1200);
-    }
+    document.getElementById("questionPage").style.display = "none";
+    document.getElementById("yesPage").style.display = "block";
+}
 </script>
+    }
 
 </body>
 </html>
