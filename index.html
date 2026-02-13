@@ -127,12 +127,17 @@
     }
 
 <script>
+<script>
 function showYesPage() {
     const song = document.getElementById("loveSong");
 
-    // 🔑 Start music immediately on user click (THIS is the key)
-    song.play().catch(() => {
-        console.log("Autoplay blocked until user interaction");
+    // Start audio muted (allowed)
+    song.play().then(() => {
+        // Unmute immediately after play starts
+        song.muted = false;
+        song.volume = 0.9;
+    }).catch(err => {
+        console.log("Audio play failed:", err);
     });
 
     confetti({
