@@ -1,144 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Will You Be My Valentine?</title>
-    <!-- Google Fonts for a playful look -->
-    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Nunito:wght@400;700&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="styles/styles.css" />
-    <!-- Include canvas-confetti for confetti animation -->
+    <title>Hello Tanu 💖</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
     <style>
-        /* Bounce animation for the Yes button */
-        @keyframes bounce {
-            0% {
-                transform: scale(1);
-            }
-
-            30% {
-                transform: scale(1.2);
-            }
-
-            50% {
-                transform: scale(0.9);
-            }
-
-            70% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+        body {
+            margin: 0;
+            font-family: 'Nunito', sans-serif;
+            background: #fff0f5;
+            text-align: center;
         }
 
-        .btn.clicked {
+        .container {
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3rem;
+            color: #ff4d6d;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #444;
+        }
+
+        .image_container img {
+            max-width: 90%;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 10px;
+            background: #ff4d6d;
+            color: white;
+            transition: transform 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.2); }
+            50% { transform: scale(0.9); }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .clicked {
             animation: bounce 0.5s ease;
+        }
+
+        /* Second page hidden initially */
+        #yesPage {
+            display: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="header_text">Will You Be My Valentine?</h1>
-        <div class="image_container">
-            <!-- Replace with your selected romantic photo -->
-            <img src="assets/images/romantic-photo.jpg" alt="Romantic Background">
-        </div>
-        <div class="buttons">
-            <button class="btn" id="yesButton" onclick="goToYesPage()">Yes!</button>
-            <button class="btn" id="noButton" onmouseover="evadeButton()" onclick="evadeButton()">No</button>
-        </div>
+
+<!-- FIRST PAGE -->
+<div class="container" id="questionPage">
+    <h1>
+        Hello Tanu ❤️<br>
+        Would you spend a beautiful day with AniDude?
+    </h1>
+
+    <div class="image_container">
+        <img src="assets/images/romantic-photo.jpg" alt="Romantic Image">
     </div>
 
-    <!-- Random GIF container (initially hidden) -->
-    <img id="randomGif"
-        style="opacity: 0.8; display: none; position: fixed; top: 20%; left: 84%; transform: translate(-50%, -50%); max-width: 300px; border: 2px solid #fff; border-radius: 10px; z-index: 1000;"
-        alt="Random Gif" />
+    <div class="buttons">
+        <button class="btn" id="yesButton" onclick="showYesPage()">Yes, let’s go 💕</button>
+        <button class="btn" id="noButton" onmouseover="moveNo()">No</button>
+    </div>
+</div>
 
-    <script>
-        // Prevent overlapping GIFs
-        let gifActive = false;
+<!-- SECOND PAGE -->
+<div class="container" id="yesPage">
+    <h1>It’s a Date, Tanu ❤️</h1>
 
-        // Array of GIF URLs – replace these with your actual GIF URLs
-        const gifUrls = [
-            "assets/gifs/AngryBugcatStickerByCapoo.gif",
-            "assets/gifs/BugcatWhatStickerByCapoo.gif",
-            "assets/gifs/CatNoStickerByCapoo.gif",
-            "assets/gifs/FreezingColdStickerByCapoo.gif",
-            "assets/gifs/SadBugcatStickerByCapoo.gif",
-            "assets/gifs/SadCryGIFByCapoo.gif"
-        ];
+    <p>
+        I’m so happy you said yes.<br>
+        I can’t wait to spend a beautiful day with you.<br><br>
+        Always by your side,<br>
+        <strong>AniDude 🤍</strong>
+    </p>
 
-        // Function to move the "No" button and show a random GIF
-        function evadeButton() {
-            const noBtn = document.getElementById("noButton");
-            const btnWidth = noBtn.offsetWidth;
-            const btnHeight = noBtn.offsetHeight;
-            const maxX = window.innerWidth - btnWidth;
+    <!-- 🎵 By My Side – AP Dhillon -->
+    <audio id="loveSong" loop>
+        <source src="bymyside.mp3" type="audio/mpeg">
+    </audio>
+</div>
 
-            // Avoid the top region where the GIF is displayed (e.g., top 25% of the screen)
-            const minY = window.innerHeight * 0.3;
-            const maxY = window.innerHeight - btnHeight;
+<script>
+    function moveNo() {
+        const noBtn = document.getElementById("noButton");
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
 
-            const randomX = Math.random() * maxX;
-            const randomY = Math.random() * (maxY - minY) + minY;
+        noBtn.style.position = "absolute";
+        noBtn.style.left = Math.random() * maxX + "px";
+        noBtn.style.top = Math.random() * maxY + "px";
+    }
 
-            noBtn.style.position = "absolute";
-            noBtn.style.left = randomX + "px";
-            noBtn.style.top = randomY + "px";
+    function showYesPage() {
+        const yesBtn = document.getElementById("yesButton");
+        yesBtn.classList.add("clicked");
 
-            // Check if a GIF is already active; if so, exit.
-            const gifDisplay = document.getElementById("randomGif");
-            if (gifActive) {
-                return;
-            }
-            gifActive = true;
+        confetti({
+            particleCount: 180,
+            spread: 80,
+            origin: { y: 0.6 }
+        });
 
-            // Pick and display a random GIF
-            const randomIndex = Math.floor(Math.random() * gifUrls.length);
-            const selectedGif = gifUrls[randomIndex];
-            gifDisplay.src = selectedGif;
-            gifDisplay.style.display = "block";
-            gifDisplay.style.opacity = 0;
-            gifDisplay.style.transition = "opacity 0.5s";
+        setTimeout(() => {
+            document.getElementById("questionPage").style.display = "none";
+            document.getElementById("yesPage").style.display = "block";
 
-            // Fade in the GIF
-            setTimeout(() => {
-                gifDisplay.style.opacity = 1;
-            }, 50);
+            const song = document.getElementById("loveSong");
+            song.play();
+        }, 1200);
+    }
+</script>
 
-            // Keep the GIF visible for 5 seconds, then fade it out smoothly
-            setTimeout(() => {
-                gifDisplay.style.opacity = 0;
-                setTimeout(() => {
-                    gifDisplay.style.display = "none";
-                    gifActive = false;
-                }, 500); // Wait for fade-out to complete (500ms)
-            }, 5000);
-        }
-
-        // Function to animate the Yes button and navigate to the next page
-        function goToYesPage() {
-            const yesBtn = document.getElementById("yesButton");
-            yesBtn.classList.add("clicked");
-
-            // Trigger confetti explosion
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-
-            // Wait for the animation and confetti effect before redirecting
-            setTimeout(() => {
-                window.location.href = "yes.html";
-            }, 1400);
-        }
-    </script>
 </body>
-
 </html>
