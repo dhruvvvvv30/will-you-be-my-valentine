@@ -3,48 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yay! You Said Yes!</title>
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/yes_style.css" />
+  <title>Hello Tanu ❤️</title>
 
   <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 
-<body>
-  <div class="container">
-    <h1 class="header_text">Yayyy you said yes!!!! ❤️</h1>
+<body style="text-align:center; font-family:sans-serif; background:#fff0f5; padding-top:80px;">
 
-    <div class="gif_container">
-      <img src="https://media.giphy.com/media/fngeQvy995JpJhoMgz/giphy.gif" alt="Celebration GIF">
-    </div>
+  <h1>Hello Tanu ❤️<br>Would you spend a beautiful day with AniDude?</h1>
 
-    <!-- 🎵 MUSIC -->
-    <audio id="loveSong" loop>
-      <source src="bymysidetrim.mpeg" type="audio/mpeg">
-    </audio>
-  </div>
+  <button onclick="goYes()">Yes 💕</button>
+  <button onmouseover="moveNo()" id="noBtn">No</button>
 
   <script>
-    window.onload = function () {
-      const song = document.getElementById("loveSong");
-
-      // confetti on load
+    function goYes() {
       confetti({
         particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
+        spread: 70
       });
 
-      // play music after first click (browser safe)
-      document.body.addEventListener("click", () => {
-        song.volume = 0.9;
-        song.play();
-      }, { once: true });
-    };
+      setTimeout(() => {
+        window.location.href = "yes.html";
+      }, 500);
+    }
+
+    function moveNo() {
+      const btn = document.getElementById("noBtn");
+      btn.style.position = "absolute";
+      btn.style.left = Math.random()*window.innerWidth + "px";
+      btn.style.top = Math.random()*window.innerHeight + "px";
+    }
   </script>
+
 </body>
 </html>
 
