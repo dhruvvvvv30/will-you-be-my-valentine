@@ -5,24 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hello Tanu ❤️</title>
 
-  <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #fff0f5;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    img {
+      width: 300px;
+      border-radius: 15px;
+      margin: 25px 0;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
-<body style="text-align:center; font-family:sans-serif; background:#fff0f5; padding-top:80px;">
+<body>
 
   <h1>Hello Tanu ❤️<br>Would you spend a beautiful day with AniDude?</h1>
 
+  <!-- 💐 YOUR BOUQUET / IMAGE -->
+  <img src="assets/images/romantic-photo.jpg" alt="Bouquet">
+
+  <br>
+
   <button onclick="goYes()">Yes 💕</button>
-  <button onmouseover="moveNo()" id="noBtn">No</button>
+  <button id="noBtn" onmouseover="moveNo()">No</button>
 
   <script>
     function goYes() {
-      confetti({
-        particleCount: 150,
-        spread: 70
-      });
-
+      confetti({ particleCount: 150, spread: 70 });
       setTimeout(() => {
         window.location.href = "yes.html";
       }, 500);
@@ -38,4 +60,5 @@
 
 </body>
 </html>
+
 
