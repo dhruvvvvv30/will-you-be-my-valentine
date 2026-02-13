@@ -1,156 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello Tanu 💖</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yay! You Said Yes!</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Nunito:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/yes_style.css" />
 
-    <!-- Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Nunito', sans-serif;
-            background: #fff0f5;
-            text-align: center;
-        }
-
-        .container {
-            padding: 40px 20px;
-        }
-
-        h1 {
-            font-family: 'Sacramento', cursive;
-            font-size: 3rem;
-            color: #ff4d6d;
-        }
-
-        p {
-            font-size: 1.2rem;
-            color: #444;
-        }
-
-        .image_container img {
-            max-width: 90%;
-            border-radius: 16px;
-            margin: 20px 0;
-        }
-
-        .buttons {
-            margin-top: 30px;
-        }
-
-        .btn {
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            margin: 10px;
-            background: #ff4d6d;
-            color: white;
-            transition: transform 0.2s ease;
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-        }
-
-        @keyframes bounce {
-            0% { transform: scale(1); }
-            30% { transform: scale(1.2); }
-            50% { transform: scale(0.9); }
-            70% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .clicked {
-            animation: bounce 0.5s ease;
-        }
-
-        /* Second page hidden initially */
-        #yesPage {
-            display: none;
-        }
-    </style>
+  <!-- Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
+  <div class="container">
+    <h1 class="header_text">Yayyy you said yes!!!! ❤️</h1>
 
-<!-- FIRST PAGE -->
-<div class="container" id="questionPage">
-    <h1>
-        Hello Tanu ❤️<br>
-        Would you spend a beautiful day with AniDude?
-    </h1>
-
-    <div class="image_container">
-        <img src="assets/images/romantic-photo.jpg" alt="Romantic Image">
+    <div class="gif_container">
+      <img src="https://media.giphy.com/media/fngeQvy995JpJhoMgz/giphy.gif" alt="Celebration GIF">
     </div>
 
-    <div class="buttons">
-        <button class="btn" id="yesButton" onclick="showYesPage()">Yes, let’s go 💕</button>
-        <button class="btn" id="noButton" onmouseover="moveNo()">No</button>
-    </div>
-</div>
-
-<!-- SECOND PAGE -->
-<div class="container" id="yesPage">
-    <h1>It’s a Date, Tanu ❤️</h1>
-
-    <p>
-        I’m so happy you said yes.<br>
-        I can’t wait to spend a beautiful day with you.<br><br>
-        Always by your side,<br>
-        <strong>AniDude 🤍</strong>
-    </p>
-
-    <!-- 🎵 By My Side – AP Dhillon -->
+    <!-- 🎵 MUSIC -->
     <audio id="loveSong" loop>
-        <source src="bymysidetrim.mpeg" type="audio/mpeg">
+      <source src="bymysidetrim.mpeg" type="audio/mpeg">
     </audio>
-</div>
+  </div>
 
-<script>
-    function moveNo() {
-        const noBtn = document.getElementById("noButton");
-        const maxX = window.innerWidth - noBtn.offsetWidth;
-        const maxY = window.innerHeight - noBtn.offsetHeight;
+  <script>
+    window.onload = function () {
+      const song = document.getElementById("loveSong");
 
-        noBtn.style.position = "absolute";
-        noBtn.style.left = Math.random() * maxX + "px";
-        noBtn.style.top = Math.random() * maxY + "px";
-    }
-
-<script>
-<script>
-function showYesPage() {
-    const song = document.getElementById("loveSong");
-
-    // Start audio muted (allowed)
-    song.play().then(() => {
-        // Unmute immediately after play starts
-        song.muted = false;
-        song.volume = 0.9;
-    }).catch(err => {
-        console.log("Audio play failed:", err);
-    });
-
-    confetti({
-        particleCount: 180,
-        spread: 80,
+      // confetti on load
+      confetti({
+        particleCount: 150,
+        spread: 70,
         origin: { y: 0.6 }
-    });
+      });
 
-    document.getElementById("questionPage").style.display = "none";
-    document.getElementById("yesPage").style.display = "block";
-}
-</script>
-    }
-
+      // play music after first click (browser safe)
+      document.body.addEventListener("click", () => {
+        song.volume = 0.9;
+        song.play();
+      }, { once: true });
+    };
+  </script>
 </body>
 </html>
+
